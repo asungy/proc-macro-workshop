@@ -17,23 +17,9 @@
         name = "pmw";
       in
       {
-        defaultPackage = pkgs.stdenv.mkDerivation {
-          inherit name;
-          src = self;
-          buildInputs = [
-            pkgs.rust-bin.stable.latest.default
-          ];
-          buildPhase = ''
-            cargo build --release
-          '';
-          installPhase = ''
-            mkdir -p $out/bin
-            cp ./target/release/kodo $out/bin
-          '';
-        };
-
         devShells.default = pkgs.mkShell {
           buildInputs = [
+            pkgs.cargo-expand
             pkgs.rust-analyzer
             pkgs.rust-bin.stable.latest.default
           ];
